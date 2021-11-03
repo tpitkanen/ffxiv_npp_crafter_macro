@@ -116,6 +116,23 @@ def autocomplete_line(line):
     return matching
 
 
+def paginate(lines, page_size=15, se=1):
+    """Break lines into `page_size` sized pages with sound effect `se`"""
+    processed = []
+    remaining = lines
+    i = 1
+
+    while len(remaining) > 15:
+        processed += remaining[:14]
+        remaining = remaining[14:]
+        processed.append("/echo Page {0} done <se.{1}>".format(i, se))
+        processed.append("")
+        i += 1
+    processed += remaining
+
+    return processed
+
+
 def get_lines():
     """Get all lines from Notepad++ editor tab"""
     return editor.getText().splitlines()
@@ -129,6 +146,7 @@ def set_lines(lines):
 def main():
     lines = get_lines()
     new_lines = create_macro(lines)
+    new_lines = paginate(new_lines)
     set_lines(new_lines)
 
 
