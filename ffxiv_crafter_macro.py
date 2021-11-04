@@ -43,7 +43,7 @@ ACTIONS = {
     "Intensive Synthesis",
     "Trained Eye"
 }
-ACTIONS = {a.lower(): a for a in ACTIONS}
+ACTIONS = {a.lower(): (a, 3) for a in ACTIONS}
 
 # Buffs, need 2 s wait time
 BUFFS = {
@@ -61,7 +61,12 @@ BUFFS = {
     "Manipulation",
     "Reflect"
 }
-BUFFS = {b.lower(): b for b in BUFFS}
+BUFFS = {b.lower(): (b, 2) for b in BUFFS}
+
+# Combined actions & buffs
+SKILLS = {}
+SKILLS.update(ACTIONS)
+SKILLS.update(BUFFS)
 
 # {0}: action name, {1}: wait time
 AC_TEMPLATE = '/ac "{0}" <wait.{1}>'
@@ -73,12 +78,8 @@ def create_macro(lines, wait_last_line=False, autocomplete=True):
     for unedited_line in lines:
         line = unedited_line.strip().lower()
 
-        if line in ACTIONS:
-            line = AC_TEMPLATE.format(ACTIONS[line], 3)
-            new_lines.append(line)
-            continue
-        elif line in BUFFS:
-            line = AC_TEMPLATE.format(BUFFS[line], 2)
+        if line in SKILLS:
+            line = AC_TEMPLATE.format(*SKILLS[line])
             new_lines.append(line)
             continue
         else:
@@ -105,13 +106,9 @@ def autocomplete_line(line):
     line = line.lower()
     matching = []
 
-    for action in ACTIONS:
-        if action.startswith(line):
-            matching.append((ACTIONS[action], 3))
-
-    for buff in BUFFS:
-        if buff.startswith(line):
-            matching.append((BUFFS[buff], 2))
+    for skill in SKILLS:
+        if skill.startswith(line):
+            matching.append(SKILLS[skill])
 
     return matching
 
