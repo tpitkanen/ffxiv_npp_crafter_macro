@@ -71,6 +71,12 @@ SKILLS.update(BUFFS)
 # {0}: action name, {1}: wait time
 AC_TEMPLATE = '/ac "{0}" <wait.{1}>'
 
+# {0}: page number, {1}: sound effect number
+PAGE_DONE_TEMPLATE = "/echo Page {0} done <se.{1}>"
+
+# {0}: sound effect number
+MACRO_DONE_TEMPLATE = "/echo Macro done <se.{0}>"
+
 
 def create_macro(lines, wait_last_line=False, autocomplete=True):
     """Convert lines with crafter skills into "/ac" macro lines"""
@@ -102,7 +108,7 @@ def create_macro(lines, wait_last_line=False, autocomplete=True):
 
 
 def autocomplete_line(line):
-    """Return all actions/buffs that begin with `line`'s content."""
+    """Return all actions/buffs that begin with `line`'s content"""
     line = line.lower()
     matching = []
 
@@ -113,19 +119,24 @@ def autocomplete_line(line):
     return matching
 
 
-def paginate(lines, page_size=15, se=1):
+def paginate(lines, page_size=15, se=1, se_on_last_page=False):
     """Break lines into `page_size` sized pages with sound effect `se`"""
     processed = []
     remaining = lines
-    i = 1
 
-    while len(remaining) > 15:
-        processed += remaining[:14]
-        remaining = remaining[14:]
-        processed.append("/echo Page {0} done <se.{1}>".format(i, se))
+    split_index = page_size - 1
+    page_number = 1
+
+    while len(remaining) > page_size:
+        processed += remaining[:split_index]
+        remaining = remaining[split_index:]
+        processed.append(PAGE_DONE_TEMPLATE.format(page_number, se))
         processed.append("")
-        i += 1
+        page_number += 1
     processed += remaining
+
+    if se_on_last_page:
+        processed.append(MACRO_DONE_TEMPLATE.format(se))
 
     return processed
 
