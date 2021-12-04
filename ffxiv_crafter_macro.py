@@ -28,12 +28,10 @@ ACTIONS = {
     "Hasty Touch",
     "Rapid Synthesis",
     "Standard Touch",
-    "Brand Of The Elements",
     "Byregot's Blessing",
     "Precise Touch",
     "Careful Synthesis",
     "Muscle Memory",
-    "Patient Touch",
     "Prudent Touch",
     "Focused Synthesis",
     "Focused Touch",
@@ -41,7 +39,10 @@ ACTIONS = {
     "Groundwork",
     "Delicate Synthesis",
     "Intensive Synthesis",
-    "Trained Eye"
+    "Trained Eye",
+    "Advanced Touch",
+    "Prudent Synthesis",
+    "Trained Finesse"
 }
 ACTIONS = {a.lower(): (a, 3) for a in ACTIONS}
 
@@ -54,7 +55,6 @@ BUFFS = {
     "Veneration",
     "Great Strides",
     "Innovation",
-    "Name Of The Elements",
     "Final Appraisal",
     "Waste Not II",
     "Careful Observation",
