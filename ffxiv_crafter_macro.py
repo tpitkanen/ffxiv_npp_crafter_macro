@@ -35,6 +35,7 @@ ACTIONS = {
     "Prudent Touch",
     "Focused Synthesis",
     "Focused Touch",
+    "Reflect",
     "Preparatory Touch",
     "Groundwork",
     "Delicate Synthesis",
@@ -58,8 +59,7 @@ BUFFS = {
     "Final Appraisal",
     "Waste Not II",
     "Careful Observation",
-    "Manipulation",
-    "Reflect"
+    "Manipulation"
 }
 BUFFS = {b.lower(): (b, 2) for b in BUFFS}
 
