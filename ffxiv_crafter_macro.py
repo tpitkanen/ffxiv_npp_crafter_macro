@@ -33,8 +33,6 @@ ACTIONS = {
     "Careful Synthesis",
     "Muscle Memory",
     "Prudent Touch",
-    "Focused Synthesis",
-    "Focused Touch",
     "Reflect",
     "Preparatory Touch",
     "Groundwork",
@@ -43,7 +41,9 @@ ACTIONS = {
     "Trained Eye",
     "Advanced Touch",
     "Prudent Synthesis",
-    "Trained Finesse"
+    "Trained Finesse",
+    "Refined Touch",
+    "Immaculate Mend",
 }
 ACTIONS = {a.lower(): (a, 3) for a in ACTIONS}
 
@@ -59,7 +59,8 @@ BUFFS = {
     "Final Appraisal",
     "Waste Not II",
     "Careful Observation",
-    "Manipulation"
+    "Manipulation",
+    "Trained Perfection",
 }
 BUFFS = {b.lower(): (b, 2) for b in BUFFS}
 
